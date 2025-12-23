@@ -1,5 +1,6 @@
 #include <cstddef>
 #include <iostream>
+
 struct Vector3D
 {
     float x, y, z;
@@ -33,6 +34,22 @@ struct Vector3D
 
         return (*this);
     };
+
+    Vector3D& operator+=(const Vector3D& v)
+    {
+        x += v.x;
+        y += v.y;
+        z += v.z;
+        return (*this);
+    }
+
+    Vector3D& operator-=(const Vector3D& v)
+    {
+        x -= v.x;
+        y -= v.y;
+        z -= v.z;
+        return (*this);
+    }
 };
 
 inline Vector3D operator*(const Vector3D& v, float s)
@@ -46,7 +63,7 @@ inline Vector3D operator/(const Vector3D& v, float s)
     return Vector3D(v.x * s, v.y * s, v.z * s);
 }
 
-inline Vector3D operator-(const Vector3D& v)
+inline Vector3D operator-(const Vector3D& v) // unary operator
 {
     return Vector3D(-v.x, -v.y, -v.z);
 }
@@ -59,6 +76,16 @@ inline float Magnitude(const Vector3D& v)
 inline Vector3D Normalize(const Vector3D& v)
 {
     return v / Magnitude(v);
+}
+
+inline Vector3D operator+(const Vector3D& a, const Vector3D& b)
+{
+    return Vector3D(a.x + b.x, a.y + b.y, a.z + b.z);
+}
+
+inline Vector3D operator-(const Vector3D& a, const Vector3D& b)
+{
+    return Vector3D(a.x - b.x, a.y - b.y, a.z - b.z);
 }
 
 int main()
