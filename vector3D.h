@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <cstddef>
+#include <iomanip>
 #include <iostream>
 
 struct Vector3D
@@ -53,6 +54,16 @@ struct Vector3D
         y -= v.y;
         z -= v.z;
         return (*this);
+    }
+
+    void print() const
+    {
+        std::cout << std::fixed << std::setprecision(2);
+        std::cout << "┌       ┐\n";
+        std::cout << "│ " << std::setw(5) << x << " │\n";
+        std::cout << "│ " << std::setw(5) << y << " │\n";
+        std::cout << "│ " << std::setw(5) << z << " │\n";
+        std::cout << "└       ┘\n";
     }
 };
 

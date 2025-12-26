@@ -1,6 +1,8 @@
 #ifndef MATRIX3D_H
 #define MATRIX3D_H
 #include "vector3D.h"
+#include <iomanip> // for std::setw and std::setprecision
+#include <iostream>
 
 /*
 
@@ -22,7 +24,17 @@ struct Matrix3D
     float n[3][3];
 
   public:
-    Matrix3D() = default;
+    // Matrix3D() : n{} {}; // zero initialization;
+
+    // identity matrix
+    // clang-format off
+    Matrix3D()
+    {
+        n[0][0] = 1.0f; n[0][1] = 0.0f; n[0][2] = 0.0f;  // 1 0 0
+        n[1][0] = 0.0f; n[1][1] = 1.0f; n[1][2] = 0.0f;  // 0 1 0
+        n[2][0] = 0.0f; n[2][1] = 0.0f; n[2][2] = 1.0f;  // 0 0 1
+    }
+    // clang-format on
 
     // column major notation constructors
     // [C][R] to [R][C]
@@ -62,6 +74,27 @@ struct Matrix3D
     const Vector3D& operator[](int j) const
     {
         return reinterpret_cast<const Vector3D&>(n[j]);
+    }
+
+    void print() const
+    {
+        std::cout << std::fixed << std::setprecision(2);
+        std::cout << "┌                         ┐\n";
+        for (int i = 0; i < 3; ++i)
+        {
+            std::cout << "│ ";
+            for (int j = 0; j < 3; ++j)
+            {
+                std::cout << std::setw(7) << n[j][i] << " ";
+            }
+            std::cout << "│\n";
+        }
+        std::cout << "└                         ┘\n";
+    }
+
+    void print_col(const int i) const
+    {
+        (*this)[i].print();
     }
 };
 
