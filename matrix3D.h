@@ -1,7 +1,7 @@
 #ifndef MATRIX3D_H
 #define MATRIX3D_H
 #include "vector3D.h"
-#include <iomanip> // for std::setw and std::setprecision
+#include <iomanip>
 #include <iostream>
 
 /*
